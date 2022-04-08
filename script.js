@@ -3,29 +3,29 @@
 // maybe a bonus round of mouse dodging very fast bullets coming out of nowhere like undertale every win
 // and then when you win game gets harder, there's a countdown and music and flashing lights
 // and the picks keep moving around on the screen HAHA, play again button replaces 3 buttons
-// and in 2 wins, let user know the buttons get switched 
+// and in 2 wins, let player know the buttons get switched 
 // in 3 wins, make play again button 3/4 the screen
 
 let picks = document.querySelectorAll('.picks');
 let restart = document.querySelector('#restart');
 let output = document.querySelector('.output');
 
-let user; 
+let player; 
 let comp = {value: ''};
-let userInt = 0;
+let playerInt = 0;
 let compInt = 0;
 
 picks.forEach(element => {
     element.addEventListener('click', () => {
         output.textContent = 'clicked'
-        user = element.id;
-        output.textContent = user;
-        if (user == 'rock') {
-            userInt = 0;
-        } else if (user == 'paper') {
-            userInt = 1;
-        } else if (user == 'scissors') {
-            userInt = 2;
+        player = element.id;
+        output.textContent = player;
+        if (player == 'rock') {
+            playerInt = 0;
+        } else if (player == 'paper') {
+            playerInt = 1;
+        } else if (player == 'scissors') {
+            playerInt = 2;
         }
         compInt = compPlay(comp);
         playGame()
@@ -47,7 +47,17 @@ function compPlay(s) {
 
 
 function playGame() {
-    
+    let win_arr =   [[0, 2, 1],
+                    [1, 0, 2],
+                    [2, 1, 0]];
+    let result = win_arr[playerInt][compInt];
+    if (result == 0) {
+        console.log('tie')
+    } else if (result == 1) {
+        console.log('win')
+    } else if (result == 2) {
+        console.log('lose')
+    }
 }
 
 
