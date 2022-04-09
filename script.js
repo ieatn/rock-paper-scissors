@@ -8,18 +8,21 @@
 
 let picks = document.querySelectorAll('.picks');
 let restart = document.querySelector('#restart');
-let output = document.querySelector('.output');
+const output = document.querySelector('.output');
+let score = document.querySelector('.score');
 
 let player; 
 let comp = {value: ''};
 let playerInt = 0;
 let compInt = 0;
+let playerScore = 0;
+let compScore = 0;
+
+output.textContent = "Choose Rock, Paper, or Scissors";
 
 picks.forEach(element => {
     element.addEventListener('click', () => {
-        output.textContent = 'clicked'
         player = element.id;
-        output.textContent = player;
         if (player == 'rock') {
             playerInt = 0;
         } else if (player == 'paper') {
@@ -33,30 +36,47 @@ picks.forEach(element => {
 });
 
 // using math random, return and set compInt to a random n and set its value to corresponding
-function compPlay(s) {
-    let r = Math.floor(Math.random()*3); // random n from 1-3, floor to int
-    if (r == 0) {
-        s.value = "rock"
-    } else if (r == 1) {
-        s.value = 'paper'
+function compPlay(computerChoice) {
+    let n = Math.floor(Math.random()*3); // random n from 1-3, floor to int
+    if (n == 0) {
+        computerChoice.Value = "rock"
+    } else if (n == 1) {
+        computerChoice.Value = "paper"
     } else {
-        s.value = 'scissors'
+        computerChoice.Value = "scissors"
     }
-    return r; 
+    return n; 
 }
 
-
 function playGame() {
+    playRound();
+    if (playerScore == 5) {
+        output.textContent = "You Won the Game! Congrats";
+        playerScore = 0;
+        compScore = 0;
+    } else if (compScore == 5) {
+        output.textContent = "You Lost the game:/ Maybe find something else to do?"
+        playerScore = 0;
+        compScore = 0;
+    }
+}
+
+function playRound() {
     let win_arr =   [[0, 2, 1],
                     [1, 0, 2],
                     [2, 1, 0]];
     let result = win_arr[playerInt][compInt];
     if (result == 0) {
-        console.log('tie')
+        output.textContent = `Its a tie! You chose ${player} and The computer chose ${comp.Value}`;
+        score.textContent = `${playerScore} : ${compScore}`
     } else if (result == 1) {
-        console.log('win')
+        output.textContent = `You won! You chose ${player} and The computer chose ${comp.Value}`;
+        playerScore++;
+        score.textContent = `${playerScore} : ${compScore}`
     } else if (result == 2) {
-        console.log('lose')
+        output.textContent = `You lost! You chose ${player} and The computer chose ${comp.Value}`;
+        compScore++;
+        score.textContent = `${playerScore} : ${compScore}`
     }
 }
 
