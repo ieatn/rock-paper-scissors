@@ -55,7 +55,7 @@ function playGame() {
         playerScore = 0;
         compScore = 0;
     } else if (compScore == 5) {
-        output.textContent = "You Lost the game:/ Maybe find something else to do?"
+        output.textContent = "You LOST TO A BOT HAHA🤣 Get out of here find something else to do"
         playerScore = 0;
         compScore = 0;
     }
